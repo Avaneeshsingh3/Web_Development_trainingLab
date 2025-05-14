@@ -1,2 +1,0 @@
-1 :-  assignment 5 --- marksheet garudtion app
-2:-   assignment 6 --- resume builder app
