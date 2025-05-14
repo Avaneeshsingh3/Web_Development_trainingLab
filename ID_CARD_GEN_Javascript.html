@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Student ID Card Generator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background-color: #e9f0f7;
+    }
+
+    .form-section {
+      max-width: 300px;
+      margin-bottom: 20px;
+    }
+
+    input {
+      width: 100%;
+      padding: 8px;
+      margin: 6px 0;
+    }
+
+    button {
+      padding: 10px;
+      background-color: #0066cc;
+      color: white;
+      border: none;
+      width: 100%;
+      cursor: pointer;
+    }
+
+    .id-card {
+      width: 250px;
+      border: 2px solid #333;
+      border-radius: 10px;
+      background-color: white;
+      padding: 20px;
+      text-align: center;
+      display: none;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    .id-card img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 10px;
+    }
+
+    .college-name {
+      font-weight: bold;
+      font-size: 20px;
+      color: #0066cc;
+      margin-bottom: 10px;
+    }
+
+    .id-card h2 {
+      margin: 5px 0;
+    }
+
+    .id-card p {
+      margin: 4px 0;
+    }
+
+    .id-footer {
+      margin-top: 10px;
+      font-size: 12px;
+      color: gray;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="form-section">
+    <h2>Student Info</h2>
+    <input type="text" id="studentName" placeholder="Student Name">
+    <input type="text" id="course" placeholder="Course (e.g. BCA, MCA)">
+    <input type="text" id="roll" placeholder="Roll Number">
+    <input type="date" id="dob" placeholder="Date of Birth">
+    <input type="file" id="photoInput" accept="image/*">
+    <button onclick="generateStudentCard()">Generate ID Card</button>
+  </div>
+
+  <div class="id-card" id="studentCard">
+    <div class="college-name">ABES Engineering College</div>
+    <img id="studentPhoto" src="" alt="Student Photo">
+    <h2 id="nameDisplay"></h2>
+    <p id="courseDisplay"></p>
+    <p><strong>Roll No:</strong> <span id="rollDisplay"></span></p>
+    <p><strong>DOB:</strong> <span id="dobDisplay"></span></p>
+    <div class="id-footer">Valid for Academic Year 2024-2025</div>
+  </div>
+
+  <script>
+    function generateStudentCard() {
+      const name = document.getElementById("studentName").value;
+      const course = document.getElementById("course").value;
+      const roll = document.getElementById("roll").value;
+      const dob = document.getElementById("dob").value;
+      const photoInput = document.getElementById("photoInput");
+
+      document.getElementById("nameDisplay").textContent = name;
+      document.getElementById("courseDisplay").textContent = course;
+      document.getElementById("rollDisplay").textContent = roll;
+      document.getElementById("dobDisplay").textContent = dob;
+
+      if (photoInput.files && photoInput.files[0]) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          document.getElementById("studentPhoto").src = e.target.result;
+          document.getElementById("studentCard").style.display = "block";
+        };
+        reader.readAsDataURL(photoInput.files[0]);
+      } else {
+        document.getElementById("studentCard").style.display = "block";
+      }
+    }
+  </script>
+
+</body>
+</html>
